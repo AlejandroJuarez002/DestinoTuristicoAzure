@@ -1,4 +1,5 @@
 ﻿using ExploreSV.DataAccess;
+using Mapster;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System;
@@ -16,6 +17,9 @@ namespace ExploreSV.BusinessLogic
         {
             services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly()));
             services.AddDataAccessServices(configuration);
+
+            TypeAdapterConfig.GlobalSettings.Scan(Assembly.GetExecutingAssembly());
+
             return services;
         }
     }
