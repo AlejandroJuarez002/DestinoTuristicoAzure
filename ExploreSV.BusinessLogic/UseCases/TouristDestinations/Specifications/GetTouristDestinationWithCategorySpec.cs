@@ -8,7 +8,14 @@ namespace ExploreSV.BusinessLogic.UseCases.TouristDestinations.Specifications
         public GetTouristDestinationWithCategorySpec()
         {
             Query.Include(td => td.Category);
+
             Query.Include(td => td.Department);
+
+            Query.Include(td => td.Events);
+
+            Query.Include(td => td.Gastronomies);
+
+            Query.Include(td => td.Images);
         }
     }
 }

@@ -15,8 +15,8 @@ namespace ExploreSV.BusinessLogic.Mappings
             config.NewConfig<Gastronomy, GastronomyResponse>()
                 .Map(gd => gd.TouristDestinationTitle, g => g.TouristDestination.TouristDestinationTitle);
 
-            //config.NewConfig<Event, EventResponse>()
-                //.Map(ed => ed.TouristDestinationTitle, e => e.TouristDestination.TouristDestinationTitle);
+            config.NewConfig<Event, EventResponse>()
+                .Map(ed => ed.TouristDestinationTitle, e => e.TouristDestination.TouristDestinationTitle);
         }
     }
 }

@@ -24,7 +24,7 @@ namespace ExploreSV.BusinessLogic.DTOs
 
         public virtual ICollection<Gastronomy> Gastronomies { get; set; } = new List<Gastronomy>();
 
-        //public virtual ICollection<CreateImageTouristDestinationRequest> Images { get; set; } = new List<CreateImageTouristDestinationRequest>();
+        public virtual ICollection<CreateImageTouristDestinationRequest> Images { get; set; } = new List<CreateImageTouristDestinationRequest>();
     }
 
     public class UpdateTouristDestinationRequest
@@ -64,11 +64,11 @@ namespace ExploreSV.BusinessLogic.DTOs
 
         public string DepartmentName { get; set; } = null!;
 
-        //public virtual ICollection<EventResponse> Events { get; set; } = new List<EventResponse>();
+        public virtual ICollection<EventResponse> Events { get; set; } = new List<EventResponse>();
 
         public virtual ICollection<GastronomyResponse> Gastronomies { get; set; } = new List<GastronomyResponse>();
 
-        //public virtual ICollection<ImageResponse> Images { get; set; } = new List<ImageResponse>();
+        public virtual ICollection<ImageTouristDestinationResponse> Images { get; set; } = new List<ImageTouristDestinationResponse>();
     }
 
     public class TouristDestinationByIdResponse
