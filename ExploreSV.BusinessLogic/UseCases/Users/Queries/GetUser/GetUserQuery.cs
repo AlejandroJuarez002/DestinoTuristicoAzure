@@ -6,7 +6,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ExploreSV.BusinessLogic.UseCases.Events.Queries;
+namespace ExploreSV.BusinessLogic.UseCases.Users.Queries.GetUser;
 
-public record GetEventsQuery() : IRequest<List<EventResponse>>;
+public record GetUserQuery(int UserId) : IRequest<UserResponse>;
+
 

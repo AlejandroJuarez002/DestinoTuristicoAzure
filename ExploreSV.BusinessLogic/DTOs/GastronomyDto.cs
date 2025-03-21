@@ -8,7 +8,7 @@
 
         public string? GastronomyDescription { get; set; }
 
-        //public virtual ICollection<CreateImageGastronomyRequest> Images { get; set; } = new List<CreateImageGastronomyRequest>();
+        public virtual ICollection<CreateImageGastronomyRequest> Images { get; set; } = new List<CreateImageGastronomyRequest>();
     }
 
     public class UpdateGastronomyRequest
@@ -32,9 +32,9 @@
 
         public string? GastronomyDescription { get; set; }
 
-        public string TouristDestinationTitle { get; set; } = null!; //Se hace su Specification y Mapping?
+        public string TouristDestinationTitle { get; set; } = null!; //Se hace su Specification y Mapping
 
-        //public virtual ICollection<ImageGastronomyResponse> Images { get; set; } = new List<ImageGastronomyResponse>();
+        public virtual ICollection<ImageGastronomyResponse> Images { get; set; } = new List<ImageGastronomyResponse>();
     }
 }
 
