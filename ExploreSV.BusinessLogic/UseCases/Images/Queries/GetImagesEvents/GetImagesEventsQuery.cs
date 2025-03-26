@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ExploreSV.BusinessLogic.UseCases.Images.Queries;
+namespace ExploreSV.BusinessLogic.UseCases.Images.Queries.GetImagesEvents;
 
-public record GetImageTouristDestinationQuery() : IRequest<List<ImageTouristDestinationResponse>>;
+public record GetImagesEventsQuery() : IRequest<List<ImageEventResponse>>;
 
