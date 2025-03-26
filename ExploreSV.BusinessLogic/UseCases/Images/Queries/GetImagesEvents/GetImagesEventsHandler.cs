@@ -9,7 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ExploreSV.BusinessLogic.UseCases.Images.Queries;
+namespace ExploreSV.BusinessLogic.UseCases.Images.Queries.GetImagesEvents;
 internal class GetImagesEventsHandler(IEfRepository<Image> _repository)
     : IRequestHandler<GetImagesEventsQuery, List<ImageEventResponse>>
 {
