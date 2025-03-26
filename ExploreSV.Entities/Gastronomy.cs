@@ -13,7 +13,7 @@ public partial class Gastronomy
 
     public string? GastronomyDescription { get; set; }
 
-    public virtual ICollection<Image> Images { get; set; } = new List<Image>();
+    public virtual ICollection<Image> Images { get; set; } = new List<Image>(); //Evento
 
-    public virtual TouristDestination TouristDestination { get; set; } = null!;
+    public virtual TouristDestination TouristDestination { get; set; } = null!; //Llave
 }
