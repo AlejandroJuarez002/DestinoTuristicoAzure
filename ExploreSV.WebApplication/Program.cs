@@ -1,24 +1,21 @@
 using ExploreSV.BusinessLogic;
-using ExploreSV.BusinessLogic.UseCases.Users.Queries.UserAuthentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
-// Agregar soporte para sesiones
-builder.Services.AddDistributedMemoryCache(); // Necesario para almacenar las sesiones en memoria
-builder.Services.AddSession(options =>
-{
-    options.Cookie.HttpOnly = true;
-    options.Cookie.IsEssential = true; // Esto hace que la cookie sea esencial para la aplicación
-});
-
-// Agregar lógica de negocio
 builder.Services.AddBusinessLogicServices(builder.Configuration);
 
-// Agregar el caso de uso para Login
-builder.Services.AddScoped<UserAuthentication>();
+builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie((o) =>
+{
+    o.LoginPath = new PathString("/User/login");
+    o.AccessDeniedPath = new PathString("/User/login");
+    o.ExpireTimeSpan = TimeSpan.FromHours(8);
+    o.SlidingExpiration = true;
+    o.Cookie.HttpOnly = true;
+});
 
 var app = builder.Build();
 
@@ -32,16 +29,13 @@ if (!app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 
-// Usar sesiones antes de routing
-app.UseSession(); // Esta línea es importante para habilitar el uso de sesiones
-
 app.UseRouting();
+
+app.UseAuthentication();
 app.UseAuthorization();
 
-// Configurar las rutas
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
 
 app.Run();
-
