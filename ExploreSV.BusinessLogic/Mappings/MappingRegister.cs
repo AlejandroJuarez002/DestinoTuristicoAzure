@@ -10,13 +10,16 @@ namespace ExploreSV.BusinessLogic.Mappings
         {
             config.NewConfig<TouristDestination, TouristDestinationResponse>()
                 .Map(tdd => tdd.CategoryName, td => td.Category.CategoryName)
-                .Map(tdd => tdd.DepartmentName, td => td.Department.DepartamentName);
+                .Map(tdd => tdd.DepartamentName, td => td.Department.DepartamentName);
             
             config.NewConfig<Gastronomy, GastronomyResponse>()
                 .Map(gd => gd.TouristDestinationTitle, g => g.TouristDestination.TouristDestinationTitle);
 
             config.NewConfig<Event, EventResponse>()
                 .Map(ed => ed.TouristDestinationTitle, e => e.TouristDestination.TouristDestinationTitle);
+
+            config.NewConfig<User, UserResponse>()
+                .Map(ud => ud.RoleName, u => u.Role.RoleName);
         }
     }
 }

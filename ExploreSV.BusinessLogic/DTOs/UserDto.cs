@@ -1,21 +1,24 @@
 ﻿namespace ExploreSV.BusinessLogic.DTOs
 {
-    internal class UserDto
-    {
-        public string UserName { get; set; } = string.Empty;
-        public string UserPassword { get; set; } = string.Empty;
-    }
-
     public class CreateUserRequest
     {
-        public string UserName { get; set; } = null!;
+        public int RoleId { get; set; }
+
+        public string? UserPassword { get; set; }
+
+        public string? UserName { get; set; }
     }
 
     public class UserResponse
     {
         public int UserId { get; set; }
-        public string UserName { get; set; } = null!;
 
+        public int RoleId { get; set; }
+
+        public string? UserPassword { get; set; }
+
+        public string? UserName { get; set; }
+
+        public string? RoleName { get; set; }
     }
 }
-

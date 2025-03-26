@@ -62,7 +62,7 @@ namespace ExploreSV.BusinessLogic.DTOs
 
         public string CategoryName { get; set; } = null!;
 
-        public string DepartmentName { get; set; } = null!;
+        public string DepartamentName { get; set; } = null!;
 
         public virtual ICollection<EventResponse> Events { get; set; } = new List<EventResponse>();
 
