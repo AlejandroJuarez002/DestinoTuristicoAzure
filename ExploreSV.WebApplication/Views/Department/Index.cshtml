@@ -1,0 +1,32 @@
+﻿@model IEnumerable<ExploreSV.BusinessLogic.DTOs.DepartmentResponse>
+
+@{
+    ViewData["Title"] = "Departamentos";
+}
+
+<h1>Departamentos</h1>
+
+<p>
+    <a asp-action="Create" class="btn btn-info">Ir a crear Departamentos</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Nombre</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach(var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DepartamentName)
+                </td>
+                <td>
+                    @Html.ActionLink("Eliminar", "Delete", new { id = item.DepartmentId }, new { @class = "btn btn-danger" })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

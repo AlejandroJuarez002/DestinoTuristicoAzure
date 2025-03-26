@@ -1,5 +1,5 @@
 using ExploreSV.BusinessLogic;
-using ExploreSV.BusinessLogic.UseCases.Users.Queries.UserAuthentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -8,24 +8,21 @@ builder.Services.AddControllersWithViews();
 
 builder.Services.AddBusinessLogicServices(builder.Configuration);
 
-var app = builder.Build();
-
-// Agregar soporte para sesiones
-builder.Services.AddDistributedMemoryCache(); // Necesario para almacenar las sesiones en memoria
-builder.Services.AddSession(options =>
+builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie((o) =>
 {
-    options.Cookie.HttpOnly = true;
-    options.Cookie.IsEssential = true; // Esto hace que la cookie sea esencial para la aplicación
+    o.LoginPath = new PathString("/User/login");
+    o.AccessDeniedPath = new PathString("/User/login");
+    o.ExpireTimeSpan = TimeSpan.FromHours(8);
+    o.SlidingExpiration = true;
+    o.Cookie.HttpOnly = true;
 });
 
-// Agregar el caso de uso para Login
-builder.Services.AddScoped<UserAuthentication>();
+var app = builder.Build();
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Home/Error");
-    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
 
@@ -34,6 +31,7 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllerRoute(
