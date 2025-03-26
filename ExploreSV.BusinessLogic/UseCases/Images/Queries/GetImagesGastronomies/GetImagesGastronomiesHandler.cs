@@ -9,7 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ExploreSV.BusinessLogic.UseCases.Images.Queries;
+namespace ExploreSV.BusinessLogic.UseCases.Images.Queries.GetImagesGastronomies;
 
 internal class GetImagesGastronomiesHandler(IEfRepository<Image> _repository)
     : IRequestHandler<GetImagesGastronomiesQuery, List<ImageGastronomyResponse>>

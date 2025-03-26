@@ -9,7 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ExploreSV.BusinessLogic.UseCases.Images.Queries;
+namespace ExploreSV.BusinessLogic.UseCases.Images.Queries.GetImagesTouristDestinations;
 
 internal class GetImageTouristDestinationHandler(IEfRepository<Image> _repository)
     : IRequestHandler<GetImageTouristDestinationQuery, List<ImageTouristDestinationResponse>>
