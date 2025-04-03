@@ -7,7 +7,15 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <_ContentIncludedByDefault Remove="wwwroot\css\MisionVision.css" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\ExploreSV.BusinessLogic\ExploreSV.BusinessLogic.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="wwwroot\Images\" />
   </ItemGroup>
 
 </Project>
