@@ -1,37 +1,31 @@
-using System.Diagnostics;
-using Microsoft.AspNetCore.Mvc;
 using ExploreSV.WebApplication.Models;
-using MediatR;
-using ExploreSV.BusinessLogic.UseCases.Categories.Queries.GetCategories;
-using ExploreSV.BusinessLogic.UseCases.Categories.Commands.CreateCategory;
+using Microsoft.AspNetCore.Mvc;
+using System.Diagnostics;
+using ExploreSV.BusinessLogic.UseCases.TouristDestinations.Queries.GetTouristDestinations;
 using ExploreSV.BusinessLogic.DTOs;
+using MediatR;
+using Mapster;
 
 namespace ExploreSV.WebApplication.Controllers;
 
 public class HomeController : Controller
 {
     private readonly ILogger<HomeController> _logger;
+    private readonly IMediator _mediator; 
 
-    private readonly ISender _sender;
-
-    public HomeController(ILogger<HomeController> logger, ISender sender)
+    public HomeController(ILogger<HomeController> logger, IMediator sender)
     {
         _logger = logger;
-        _sender = sender;
+        _mediator = sender;
     }
 
     public async Task<IActionResult> Index()
     {
-
-        var id = await _sender.Send(new CreateCategoryCommand(new CreateCategoryRequest { CategoryName = "Categoria desde el controlador" }));
-
-        var data = await _sender.Send(new GetCategoriesQuery());
-
-
-        return View();
+        var touristDestinations = await _mediator.Send(new GetTouristDestinationsQuery());
+        return View(touristDestinations);
     }
 
-    public  IActionResult Privacy()
+    public IActionResult Privacy()
     {
         return View();
     }

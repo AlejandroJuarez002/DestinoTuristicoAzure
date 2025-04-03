@@ -1,16 +1,11 @@
 ﻿using ExploreSV.BusinessLogic.DTOs;
 using ExploreSV.DataAccess.Interfaces;
 using ExploreSV.Entities;
-using MediatR;
 using Mapster;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using MediatR;
 namespace ExploreSV.BusinessLogic.UseCases.Departments.Queries.GetDepartments;
 
-internal sealed class GetDepartamentsHandler(IEfRepository<Department> _repository) : IRequestHandler<GetDepartmentsQuery, List<DepartmentResponse>>
+internal sealed class GetDepartmentsHandler(IEfRepository<Department> _repository) : IRequestHandler<GetDepartmentsQuery, List<DepartmentResponse>>
 {
     public async Task<List<DepartmentResponse>> Handle(GetDepartmentsQuery query, CancellationToken cancellationToken)
     {
