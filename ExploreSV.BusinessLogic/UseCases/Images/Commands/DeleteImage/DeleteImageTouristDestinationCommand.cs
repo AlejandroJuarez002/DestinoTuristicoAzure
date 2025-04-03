@@ -6,5 +6,5 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace ExploreSV.BusinessLogic.UseCases.Images.Commands.DeleteImage;
-internal record DeleteImageTouristDestinationCommand(int ImageId) : IRequest<int>;
+public record DeleteImageTouristDestinationCommand(int ImageId) : IRequest<int>;
 

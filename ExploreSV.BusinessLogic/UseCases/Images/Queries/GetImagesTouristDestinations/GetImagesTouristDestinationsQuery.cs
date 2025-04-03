@@ -8,5 +8,5 @@ using System.Threading.Tasks;
 
 namespace ExploreSV.BusinessLogic.UseCases.Images.Queries.GetImagesTouristDestinations;
 
-public record GetImageTouristDestinationQuery() : IRequest<List<ImageTouristDestinationResponse>>;
+public record GetImagesTouristDestinationsQuery(int TouristDestinationId, int GastronomyId, int EventId) : IRequest<List<ImageTouristDestinationResponse>>;
 

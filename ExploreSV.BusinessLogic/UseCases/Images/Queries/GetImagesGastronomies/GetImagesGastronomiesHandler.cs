@@ -1,4 +1,5 @@
 ﻿using ExploreSV.BusinessLogic.DTOs;
+using ExploreSV.BusinessLogic.UseCases.Images.Specifications;
 using ExploreSV.DataAccess.Interfaces;
 using ExploreSV.Entities;
 using Mapster;
@@ -16,11 +17,11 @@ internal class GetImagesGastronomiesHandler(IEfRepository<Image> _repository)
 {
     public async Task<List<ImageGastronomyResponse>> Handle(GetImagesGastronomiesQuery query, CancellationToken cancellationToken)
     {
-        var categories = await _repository.ListAsync(cancellationToken);
-        if (categories == null || !categories.Any())
+        var images = await _repository.ListAsync(new GetImageByIdSpec(query.TouristDestinationId, query.GastronomyId, query.EventId), cancellationToken);
+        if (images == null || !images.Any())
         {
             return new List<ImageGastronomyResponse>();
         }
-        return categories.Adapt<List<ImageGastronomyResponse>>();
+        return images.Adapt<List<ImageGastronomyResponse>>();
     }
 }
