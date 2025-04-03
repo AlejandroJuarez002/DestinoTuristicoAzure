@@ -4,31 +4,47 @@
     ViewData["Title"] = "Categorías";
 }
 
-<link rel="stylesheet" href="~/css/Index.css" />
-
-<div class="container">
-    <div class="header">
-        <h1>Categorías</h1>
-        <a asp-action="Create" class="btn btn-primary">➕ Nueva Categoría</a>
+<div class="categories-container">
+    <div class="categories-header">
+        <h1 class="categories-title">
+            <i class="fas fa-list-alt"></i> Categorías
+        </h1>
+        <a asp-action="Create" class="btn btn-create">
+            <i class="fas fa-plus-circle"></i> ➕ Nueva Categoría
+        </a>
     </div>
 
-    <div class="table-responsive">
-        <table class="table custom-table">
+    <div class="table-responsive" style="display: flex; justify-content: center;">
+        <table class="table table-premium" style="width: auto; min-width: 500px;">
             <thead>
                 <tr>
-                    <th>Nombre</th>
-                    <th>Acciones</th>
+                    <th style="padding: 10px 20px;">Nombre de la Categoría</th>
+                    <th style="padding: 10px 20px; text-align: center;">Acción</th>
                 </tr>
             </thead>
             <tbody>
-                @foreach (var item in Model)
+                @if (Model.Any())
+                {
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td style="padding: 10px 20px;">
+                                @Html.DisplayFor(modelItem => item.CategoryName)
+                            </td>
+                            <td style="padding: 10px 20px; text-align: center;">
+                                <a asp-action="Delete" asp-route-id="@item.CategoryId" class="btn btn-delete">
+                                    <i class="fas fa-trash-alt"></i> Eliminar
+                                </a>
+                            </td>
+                        </tr>
+                    }
+                }
+                else
                 {
                     <tr>
-                        <td>@Html.DisplayFor(modelItem => item.CategoryName)</td>
-                        <td>
-                            <a asp-action="Delete" asp-route-id="@item.CategoryId" class="btn btn-danger btn-sm">
-                                🗑 Eliminar
-                            </a>
+                        <td colspan="2" class="no-categories">
+                            <i class="fas fa-inbox fa-2x mb-2"></i>
+                            <p>No hay categorías registradas</p>
                         </td>
                     </tr>
                 }
@@ -36,3 +52,107 @@
         </table>
     </div>
 </div>
+
+<style>
+    body {
+        background: linear-gradient(to bottom, #e3f2fd, #ffffff);
+    }
+
+    .categories-container {
+        background-color: #ffffff;
+        border-radius: 10px;
+        box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+        padding: 20px 30px !important;
+        margin-top: 15px !important;
+        max-width: 700px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .categories-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 10px !important;
+        padding-bottom: 8px;
+        border-bottom: 2px solid #f1f1f1;
+    }
+
+    .categories-title {
+        color: #2c3e50;
+        font-weight: 700;
+        margin: 0;
+        font-size: 1.5rem;
+    }
+
+    .btn-create {
+        background-color: #28a745;
+        color: white;
+        border: none;
+        border-radius: 6px;
+        padding: 8px 16px;
+        font-weight: 500;
+        transition: all 0.3s ease;
+        font-size: 0.9rem;
+    }
+
+        .btn-create:hover {
+            background-color: #218838;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            color: white;
+            text-decoration: none;
+        }
+
+    .table-premium {
+        border-collapse: collapse;
+        border-radius: 10px;
+        overflow: hidden;
+        margin: 0 auto;
+    }
+
+        .table-premium thead tr {
+            background: linear-gradient(135deg, #007bff 0%, #00b4ff 100%);
+            color: white;
+        }
+
+        .table-premium tbody tr {
+            transition: all 0.2s ease;
+        }
+
+            .table-premium tbody tr:hover {
+                background-color: #f8f9fa;
+                transform: translateY(-1px);
+                box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+            }
+
+    .btn-delete {
+        border-radius: 6px;
+        padding: 6px 12px;
+        font-size: 0.8rem;
+        font-weight: 500;
+        transition: all 0.2s ease;
+        border: none;
+        display: inline-flex;
+        align-items: center;
+        gap: 5px;
+        background-color: #dc3545;
+        color: white !important;
+    }
+
+        .btn-delete:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+            text-decoration: none;
+            background-color: #c82333;
+            color: white !important;
+        }
+
+    .no-categories {
+        text-align: center;
+        padding: 15px;
+        color: #6c757d;
+        font-style: italic;
+        font-size: 0.9rem;
+    }
+</style>
