@@ -1,0 +1,38 @@
+﻿@model IEnumerable<ExploreSV.BusinessLogic.DTOs.CategoryResponse>
+
+@{
+    ViewData["Title"] = "Categorías";
+}
+
+<link rel="stylesheet" href="~/css/Index.css" />
+
+<div class="container">
+    <div class="header">
+        <h1>Categorías</h1>
+        <a asp-action="Create" class="btn btn-primary">➕ Nueva Categoría</a>
+    </div>
+
+    <div class="table-responsive">
+        <table class="table custom-table">
+            <thead>
+                <tr>
+                    <th>Nombre</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@Html.DisplayFor(modelItem => item.CategoryName)</td>
+                        <td>
+                            <a asp-action="Delete" asp-route-id="@item.CategoryId" class="btn btn-danger btn-sm">
+                                🗑 Eliminar
+                            </a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
