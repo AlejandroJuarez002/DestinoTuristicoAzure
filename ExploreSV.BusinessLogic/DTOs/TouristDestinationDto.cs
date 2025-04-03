@@ -46,6 +46,8 @@ namespace ExploreSV.BusinessLogic.DTOs
         public string TouristDestinationLocation { get; set; } = null!;
 
         public string TouristDestinationSchedule { get; set; } = null!;
+
+        public virtual ICollection<CreateImageTouristDestinationRequest> Images { get; set; } = new List<CreateImageTouristDestinationRequest>();
     }
 
     public class TouristDestinationResponse
@@ -73,6 +75,8 @@ namespace ExploreSV.BusinessLogic.DTOs
 
     public class TouristDestinationByIdResponse
     {
+        public int TouristDestinationId { get; set; }
+
         public int StatusId { get; set; }
 
         public int CategoryId { get; set; }
@@ -88,5 +92,15 @@ namespace ExploreSV.BusinessLogic.DTOs
         public string TouristDestinationLocation { get; set; } = null!;
 
         public string TouristDestinationSchedule { get; set; } = null!;
+
+        public string CategoryName { get; set; } = null!;
+
+        public string DepartamentName { get; set; } = null!;
+
+        public virtual ICollection<EventResponse> Events { get; set; } = new List<EventResponse>();
+
+        public virtual ICollection<GastronomyResponse> Gastronomies { get; set; } = new List<GastronomyResponse>();
+
+        public virtual ICollection<ImageTouristDestinationResponse> Images { get; set; } = new List<ImageTouristDestinationResponse>();
     }
 }

@@ -1,0 +1,247 @@
+﻿@model ExploreSV.BusinessLogic.DTOs.TouristDestinationByIdResponse
+@using ExploreSV.Entities;
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<div class="destination-detail-container">
+    <div class="card destination-card">
+        <!-- Cabecera con título -->
+        <div class="card-header destination-header">
+            <h1 class="destination-title">@Model.TouristDestinationTitle</h1>
+        </div>
+
+        <!-- Cuerpo principal -->
+        <div class="card-body info-section">
+            <div class="row">
+                <!-- Columna de información -->
+                <div class="col-md-12">
+                    <div class="mb-4">
+                        <h4 class="section-title"><i class="fas fa-info-circle"></i> Descripción</h4>
+                        <p class="detail-value">@Model.TouristDestinationDescription</p>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6 detail-item">
+                            <h5 class="section-title"><i class="fas fa-map-marker-alt"></i> Ubicación</h5>
+                            <p class="detail-value">@Model.TouristDestinationLocation</p>
+                        </div>
+                        <div class="col-md-6 detail-item">
+                            <h5 class="section-title"><i class="fas fa-clock"></i> Horario</h5>
+                            <p class="detail-value">@Model.TouristDestinationSchedule</p>
+                        </div>
+                    </div>
+
+                    <div class="row mt-3">
+                        <div class="col-md-6 detail-item">
+                            <h5 class="section-title"><i class="fas fa-globe-americas"></i> Departamento</h5>
+                            <p class="detail-value">@Model.DepartamentName</p>
+                        </div>
+
+                        <div class="col-md-6 detail-item">
+                            <h5 class="section-title"><i class="fas fa-tag"></i> Categoría</h5>
+                            <p class="detail-value">@Model.CategoryName</p>
+                        </div>
+                    </div>
+
+                    <div class="row mt-3">
+                        <div class="col-md-6 detail-item">
+                            <h5 class="section-title"><i class="fas fa-check-circle"></i> Estado</h5>
+                            <p class="detail-value">@Model.StatusId</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sección del Carrusel -->
+            <div class="images-section">
+                <h3 class="images-title"><i class="fas fa-images"></i> Imágenes del Destino Turístico</h3>
+
+                @if (Model.Images != null && Model.Images.Any())
+                {
+                    <div class="carousel-container">
+                        <div id="destinationCarousel" class="carousel slide" data-bs-ride="carousel">
+                            <!-- Indicadores -->
+                            <div class="carousel-indicators">
+                                @{
+                                    int counter = 0; // Contador para los indicadores
+                                }
+                                @foreach (var _ in Model.Images) // No necesitamos el item, solo el count
+                                {
+                                    <button type="button" data-bs-target="#destinationCarousel"
+                                            data-bs-slide-to="@counter" class="@(counter == 0 ? "active" : "")"></button>
+                                    counter++;
+                                }
+                            </div>
+
+                            <!-- Imágenes -->
+                            <div class="carousel-inner">
+                                @{
+                                    bool isFirst = true; // Para marcar el primer item como active
+                                }
+                                @foreach (var image in Model.Images)
+                                {
+                                    <div class="carousel-item @(isFirst ? "active" : "")">
+                                        <img src="@image.ImageUrl" class="d-block w-100"
+                                             alt="Imagen de @Model.TouristDestinationTitle">
+                                    </div>
+                                    isFirst = false;
+                                }
+                            </div>
+
+                            <!-- Controles (se mantienen igual) -->
+                            <button class="carousel-control-prev" type="button" data-bs-target="#destinationCarousel" data-bs-slide="prev">
+                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                <span class="visually-hidden">Anterior</span>
+                            </button>
+                            <button class="carousel-control-next" type="button" data-bs-target="#destinationCarousel" data-bs-slide="next">
+                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                <span class="visually-hidden">Siguiente</span>
+                            </button>
+                        </div>
+                    </div>
+                }
+                else
+                {
+                    <div class="no-images">
+                        <i class="fas fa-image fa-3x mb-3"></i>
+                        <p>No hay imágenes disponibles para este destino</p>
+                    </div>
+                }
+            </div>
+        </div>
+
+        <!-- Pie de página -->
+        <div class="card-footer bg-light">
+            <div class="d-flex justify-content-between">
+                <a asp-action="Index" class="btn btn-outline-primary btn-back">
+                    <i class="fas fa-arrow-left"></i> Volver al listado
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    /* Estilos generales */
+    .destination-detail-container {
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+
+    .destination-card {
+        border: none;
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+        margin-bottom: 30px;
+    }
+
+    .destination-header {
+        background: linear-gradient(135deg, #007bff 0%, #00b4ff 100%);
+        color: white;
+        padding: 20px;
+        border-bottom: none;
+    }
+
+    .destination-title {
+        font-weight: 700;
+        margin-bottom: 0;
+    }
+
+    .info-section {
+        padding: 25px;
+    }
+
+    .section-title {
+        color: #007bff;
+        font-weight: 600;
+        margin-bottom: 15px;
+        display: flex;
+        align-items: center;
+    }
+
+        .section-title i {
+            margin-right: 10px;
+            font-size: 1.2em;
+        }
+
+    .detail-item {
+        margin-bottom: 15px;
+    }
+
+    .detail-label {
+        font-weight: 600;
+        color: #495057;
+    }
+
+    .detail-value {
+        color: #6c757d;
+    }
+
+    /* Estilos para el carrusel */
+    .images-section {
+        margin-top: 40px;
+        padding: 20px;
+        border-top: 1px solid #e9ecef;
+    }
+
+    .images-title {
+        color: #007bff;
+        font-weight: 600;
+        margin-bottom: 20px;
+        text-align: center;
+    }
+
+    .carousel-container {
+        max-width: 800px;
+        margin: 0 auto;
+    }
+
+    .carousel-item img {
+        height: 400px;
+        object-fit: cover;
+        border-radius: 8px;
+    }
+
+    .carousel-control-prev,
+    .carousel-control-next {
+        width: 5%;
+    }
+
+    .carousel-indicators {
+        bottom: -40px;
+    }
+
+        .carousel-indicators button {
+            background-color: #adb5bd;
+        }
+
+        .carousel-indicators .active {
+            background-color: #007bff;
+        }
+
+    .no-images {
+        text-align: center;
+        padding: 30px;
+        color: #6c757d;
+    }
+
+    /* Botones */
+    .btn-back {
+        border-radius: 30px;
+        padding: 8px 20px;
+        font-weight: 500;
+    }
+</style>
+
+@section Scripts {
+    <script>
+        // Inicializar el carrusel
+        var carousel = new bootstrap.Carousel(document.getElementById('destinationCarousel'), {
+            interval: 5000, // Cambia cada 5 segundos
+            wrap: true
+        });
+    </script>
+}

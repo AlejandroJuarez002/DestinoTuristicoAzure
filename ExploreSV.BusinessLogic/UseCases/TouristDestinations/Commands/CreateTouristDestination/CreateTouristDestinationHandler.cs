@@ -14,11 +14,14 @@ internal sealed class CreateTouristDestinationHandler(IEfRepository<TouristDesti
         {
             var newTouristDestination = command.Request.Adapt<TouristDestination>();
 
+            newTouristDestination.StatusId = 1;
+
             var createTouristDestination = await _repository.AddAsync(newTouristDestination, cancellationToken);
+
 
             return createTouristDestination.TouristDestinationId;
         }
-        catch (Exception)
+        catch (Exception ex)
         {
             return 0;
             throw;

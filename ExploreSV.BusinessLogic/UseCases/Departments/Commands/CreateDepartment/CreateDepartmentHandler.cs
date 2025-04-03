@@ -2,11 +2,6 @@
 using ExploreSV.Entities;
 using Mapster;
 using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 namespace ExploreSV.BusinessLogic.UseCases.Departments.Commands.CreateDepartment;
 
 internal sealed class CreateDepartmentHandler(IEfRepository<Department> _repository) : IRequestHandler<CreateDepartmentCommand, int>
