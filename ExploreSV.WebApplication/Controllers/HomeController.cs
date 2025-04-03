@@ -23,6 +23,11 @@ public class HomeController : Controller
     {
         var touristDestinations = await _mediator.Send(new GetTouristDestinationsQuery());
         return View(touristDestinations);
+
+        var data = await _sender.Send(new GetCategoriesQuery());
+
+
+        return View();
     }
 
     public IActionResult Privacy()
@@ -34,5 +39,10 @@ public class HomeController : Controller
     public IActionResult Error()
     {
         return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+    }
+
+    public IActionResult MisionVision()
+    {
+        return View("~/Views/Home/MisionVision.cshtml");
     }
 }
