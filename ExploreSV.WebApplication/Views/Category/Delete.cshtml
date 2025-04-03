@@ -1,0 +1,31 @@
+﻿@model ExploreSV.BusinessLogic.DTOs.CategoryResponse
+
+@{
+    ViewData["Title"] = "Eliminar";
+}
+
+<link rel="stylesheet" href="~/css/Eliminar.css" />
+
+<div class="delete-container">
+    <div class="delete-header">
+        <h1 style="color: #007bff;">Eliminar Categoría</h1>
+        <p>¿Está seguro que desea eliminar el registro?</p>
+    </div>
+
+    <div class="delete-content" style="margin-top: 50px;">
+        <h4 style="font-size: 16px;">Detalles de la Categoría</h4>
+        <hr />
+        <dl class="row">
+            <dt class="col-sm-3">Nombre:</dt>
+            <dd class="col-sm-9">@Html.DisplayFor(model => model.CategoryName)</dd>
+        </dl>
+    </div>
+
+    <div class="delete-actions">
+        <form asp-action="Delete">
+            <button type="submit" class="btn btn-danger">🗑 Eliminar</button>
+            <a asp-action="Index" class="btn btn-secondary">✖ Cancelar</a>
+        </form>
+    </div>
+</div>
+

@@ -23,11 +23,6 @@ public class HomeController : Controller
     public async Task<IActionResult> Index()
     {
 
-        var id = await _sender.Send(new CreateCategoryCommand(new CreateCategoryRequest { CategoryName = "Categoria desde el controlador" }));
-
-        var data = await _sender.Send(new GetCategoriesQuery());
-
-
         return View();
     }
 
