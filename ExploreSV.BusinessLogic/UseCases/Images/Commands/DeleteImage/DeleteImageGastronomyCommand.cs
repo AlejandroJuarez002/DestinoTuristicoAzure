@@ -6,4 +6,4 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace ExploreSV.BusinessLogic.UseCases.Images.Commands.DeleteImage;
-internal record DeleteImageGastronomyCommand(int ImageId) : IRequest<int>;
+public record DeleteImageGastronomyCommand(int ImageId) : IRequest<int>;

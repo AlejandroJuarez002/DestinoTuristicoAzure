@@ -7,5 +7,5 @@ using System.Threading.Tasks;
 
 namespace ExploreSV.BusinessLogic.UseCases.Events.Commands.DeleteEvent;
 
-internal record DeleteEventCommand(int eventId) : IRequest<int>;
+public record DeleteEventCommand(int eventId) : IRequest<int>;
 
