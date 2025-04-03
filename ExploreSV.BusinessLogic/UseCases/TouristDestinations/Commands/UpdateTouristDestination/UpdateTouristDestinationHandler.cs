@@ -16,7 +16,16 @@ internal sealed class UpdateTouristDestinationHandler(IEfRepository<TouristDesti
             
             if (existingTouristDestination is null) return 0;
 
-            existingTouristDestination = command.Request.Adapt(existingTouristDestination);
+            var newTouristDestination = command.Request.Images.Adapt<ICollection<Image>>();
+
+            existingTouristDestination.StatusId = command.Request.StatusId;
+            existingTouristDestination.CategoryId = command.Request.CategoryId;
+            existingTouristDestination.DepartmentId = command.Request.DepartmentId;
+            existingTouristDestination.Images = newTouristDestination;
+            existingTouristDestination.TouristDestinationTitle = command.Request.TouristDestinationTitle;
+            existingTouristDestination.TouristDestinationDescription = command.Request.TouristDestinationDescription;
+            existingTouristDestination.TouristDestinationLocation = command.Request.TouristDestinationLocation;
+            existingTouristDestination.TouristDestinationSchedule = command.Request.TouristDestinationSchedule;
 
             await _repository.UpdateAsync(existingTouristDestination, cancellationToken);
 

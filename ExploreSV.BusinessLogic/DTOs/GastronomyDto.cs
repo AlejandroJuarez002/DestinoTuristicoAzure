@@ -20,6 +20,8 @@
         public string? GastronomyTitle { get; set; }
 
         public string? GastronomyDescription { get; set; }
+
+        public virtual ICollection<CreateImageGastronomyRequest> Images { get; set; } = new List<CreateImageGastronomyRequest>();
     }
 
     public class GastronomyResponse
@@ -36,5 +38,18 @@
 
         public virtual ICollection<ImageGastronomyResponse> Images { get; set; } = new List<ImageGastronomyResponse>();
     }
-}
 
+    public class GastronomyByIdResponse
+    {
+        public int GastronomyId { get; set; }
+
+        public int TouristDestinationId { get; set; }
+
+        public string? GastronomyTitle { get; set; }
+
+        public string? GastronomyDescription { get; set; }
+
+        public string TouristDestinationTitle { get; set; } = null!; //Sirve para obtener el title en el controller get id
+
+    }
+}

@@ -1,4 +1,6 @@
-﻿@{
+﻿@model IEnumerable<ExploreSV.BusinessLogic.DTOs.TouristDestinationResponse>
+
+@{
     ViewData["Title"] = "Home Page";
 }
 
@@ -6,3 +8,14 @@
     <h1 class="display-4">Welcome</h1>
     <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
 </div>
+
+@foreach (var item in Model) {
+
+    @item.TouristDestinationTitle
+    @item.CategoryName 
+    @item.TouristDestinationLocation
+    @item.TouristDestinationSchedule 
+    @if (item.Images != null && item.Images.Any()) {
+        <img src="@item.Images.FirstOrDefault().ImageUrl" alt="Imagen" class="img-fluid rounded">
+    }
+}

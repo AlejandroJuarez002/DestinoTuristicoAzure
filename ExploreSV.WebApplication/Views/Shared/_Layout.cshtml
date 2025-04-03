@@ -7,6 +7,25 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/ExploreSV.WebApplication.styles.css" asp-append-version="true" />
+    <style>
+        html {
+            position: relative;
+            min-height: 100%;
+        }
+        
+        body {
+            margin-bottom: 60px;
+        }
+        
+        .footer {
+           
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            background-color: #415a77;
+            padding: 20px 0;
+        }
+    </style>
 </head>
 <body>
     <header>
@@ -30,6 +49,12 @@
                             <li class="nav-item">
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Department" asp-action="Index">Departamentos</a>
                             </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Category" asp-action="Index">Categorias</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Status" asp-action="Index">Estados</a>
+                            </li>
                         </ul>
                         <a class="nav-link text-dark" asp-area="" asp-controller="User" asp-action="CerrarSesion">Cerrar sesion</a>
                         <span>@User.Identity.Name</span>
@@ -48,11 +73,49 @@
         </main>
     </div>
 
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2025 - ExploreSV.WebApplication - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-        </div>
-    </footer>
+    @{
+        var controller = ViewContext.RouteData.Values["Controller"]?.ToString();
+        var action = ViewContext.RouteData.Values["Action"]?.ToString();
+    }
+
+    @if (controller == "Home" && action == "Index")
+    {
+        <footer class="footer">
+             <div class="container">
+             <div class="row">
+                    <div class="col-md-4">
+                        <h5>ExploreSV</h5>
+                        <p>Tu mejor opcion para conocer El Salvador</p>
+                    </div>
+                    <div class="col-md-4">
+                        <h5>Conocenos</h5>
+                        <ul class="list-unstyled">
+                            <li><a asp-controller="Home" asp-action="MisionVision" class="a2">Mision y Vision</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-md-4">
+                        <h5>Contacto</h5>
+                        <div class="contact-info">
+                            <img src="~/images/arroba.png" alt="Email" class="contact-icon" />
+                            <span>info@exploresv.com</span>
+                        </div>
+                        <div class="contact-info">
+                            <img src="~/images/llamar.png" alt="Teléfono" class="contact-icon" />
+                            <span>+503 7624-6958</span>
+                        </div>
+
+                    </div>
+
+                <hr />
+                   <div class="text-center footer-content">
+                      <span class="copyright">&copy; @DateTime.Now.Year</span> - 
+                      <span class="exploresv-white">ExploreSV</span> - 
+                      <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                    </div>
+            </div>
+        </footer>
+    }
+
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>

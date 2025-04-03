@@ -1,4 +1,5 @@
 ﻿using ExploreSV.BusinessLogic.DTOs;
+using ExploreSV.Entities;
 using MediatR;
 using System;
 using System.Collections.Generic;

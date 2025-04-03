@@ -1,0 +1,42 @@
+﻿@model IEnumerable<ExploreSV.BusinessLogic.DTOs.StatusResponse>
+
+@{
+    ViewData["Title"] = "Estados";
+}
+
+<link rel="stylesheet" href="~/css/Index.css" />
+
+<div class="container">
+    <div class="header">
+        <h1>Estados</h1>
+        <a asp-action="Create" class="btn btn-primary">➕ Nuevo Estado</a>
+    </div>
+
+    <div class="table-responsive">
+        <table class="table custom-table">
+            <thead>
+                <tr>
+                    <th>Nombre</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@Html.DisplayFor(modelItem => item.StatusName)</td>
+                        <td>
+                            <a asp-action="Edit" asp-route-id="@item.StatusId" class="btn btn-warning btn-sm">
+                                ✏ Modificar
+                            </a>
+                            <a asp-action="Delete" asp-route-id="@item.StatusId" class="btn btn-danger btn-sm">
+                                🗑 Eliminar
+                            </a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
