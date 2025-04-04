@@ -206,6 +206,7 @@ namespace ExploreSV.WebApplication.Controllers
         }
 
         // GET: TouristDestinationController/Details/{id}
+        [AllowAnonymous] //Sirve para acceder sin estar con la sesion iniciada
         public async Task<IActionResult> Details(int id)
         {
             var touristDestination = await _mediator.Send(new GetTouristDestinationQuery(id));

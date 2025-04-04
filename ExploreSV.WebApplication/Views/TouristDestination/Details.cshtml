@@ -2,7 +2,7 @@
 @using ExploreSV.Entities;
 
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = "Detalles";
 }
 
 <div class="destination-detail-container">
@@ -19,7 +19,7 @@
                 <div class="col-md-12">
                     <div class="mb-4">
                         <h4 class="section-title"><i class="fas fa-info-circle"></i> Descripción</h4>
-                        <p class="detail-value">@Model.TouristDestinationDescription</p>
+                        <p class="detail-value">@Html.Raw(Model.TouristDestinationDescription)</p>
                     </div>
 
                     <div class="row">
@@ -45,12 +45,12 @@
                         </div>
                     </div>
 
-                    <div class="row mt-3">
+                    @* <div class="row mt-3">
                         <div class="col-md-6 detail-item">
                             <h5 class="section-title"><i class="fas fa-check-circle"></i> Estado</h5>
                             <p class="detail-value">@Model.StatusId</p>
                         </div>
-                    </div>
+                    </div> *@
                 </div>
             </div>
 
@@ -67,7 +67,7 @@
                                 @{
                                     int counter = 0; // Contador para los indicadores
                                 }
-                                @foreach (var _ in Model.Images) // No necesitamos el item, solo el count
+                                @foreach (var _ in Model.Images)
                                 {
                                     <button type="button" data-bs-target="#destinationCarousel"
                                             data-bs-slide-to="@counter" class="@(counter == 0 ? "active" : "")"></button>
@@ -111,130 +111,142 @@
                 }
             </div>
         </div>
-
-        <!-- Pie de página -->
-        <div class="card-footer bg-light">
-            <div class="d-flex justify-content-between">
-                <a asp-action="Index" class="btn btn-outline-primary btn-back">
-                    <i class="fas fa-arrow-left"></i> Volver al listado
-                </a>
-            </div>
-        </div>
     </div>
 </div>
 
 <style>
-    /* Estilos generales */
+    /* Contenedor principal */
     .destination-detail-container {
-        max-width: 1200px;
-        margin: 0 auto;
-    }
-
-    .destination-card {
-        border: none;
-        border-radius: 10px;
-        overflow: hidden;
-        box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
-        margin-bottom: 30px;
-    }
-
-    .destination-header {
-        background: linear-gradient(135deg, #007bff 0%, #00b4ff 100%);
-        color: white;
+        max-width: 1000px;
+        margin: 40px auto;
         padding: 20px;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        background-color: #fefefe;
+    }
+
+    /* Tarjeta de destino */
+    .destination-card {
+        background: #fff;
+        border-radius: 16px;
+        overflow: hidden;
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+        transition: box-shadow 0.3s ease;
+    }
+
+        .destination-card:hover {
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+        }
+
+    /* Encabezado del destino */
+    .destination-header {
+        background: linear-gradient(135deg, #0d47a1, #1976d2);
+        color: white;
+        padding: 30px;
         border-bottom: none;
     }
 
     .destination-title {
-        font-weight: 700;
-        margin-bottom: 0;
+        font-weight: 800;
+        font-size: 28px;
+        margin: 0;
     }
 
+    /* Sección de información */
     .info-section {
-        padding: 25px;
+        padding: 25px 30px;
     }
 
     .section-title {
-        color: #007bff;
-        font-weight: 600;
-        margin-bottom: 15px;
+        color: #0d47a1;
+        font-weight: 700;
+        margin-bottom: 18px;
+        font-size: 20px;
         display: flex;
         align-items: center;
+        border-bottom: 2px solid #e3f2fd;
+        padding-bottom: 6px;
     }
 
         .section-title i {
             margin-right: 10px;
             font-size: 1.2em;
+            color: #1565c0;
         }
 
     .detail-item {
-        margin-bottom: 15px;
+        margin-bottom: 16px;
     }
 
     .detail-label {
         font-weight: 600;
-        color: #495057;
+        color: #37474f;
+        margin-bottom: 4px;
+        display: block;
     }
 
     .detail-value {
-        color: #6c757d;
+        color: #607d8b;
+        line-height: 1.6;
     }
 
-    /* Estilos para el carrusel */
+        /* Estilo para descripción multilínea */
+        .detail-value.description {
+            white-space: pre-line;
+        }
+
+    /* Carrusel */
     .images-section {
-        margin-top: 40px;
-        padding: 20px;
-        border-top: 1px solid #e9ecef;
+        margin-top: 30px;
+        padding: 20px 30px;
+        border-top: 1px solid #e0e0e0;
+        background-color: #fafafa;
+        border-radius: 0 0 16px 16px;
     }
 
     .images-title {
-        color: #007bff;
-        font-weight: 600;
+        color: #0d47a1;
+        font-weight: 700;
         margin-bottom: 20px;
         text-align: center;
+        font-size: 20px;
     }
 
     .carousel-container {
-        max-width: 800px;
+        max-width: 750px;
         margin: 0 auto;
     }
 
     .carousel-item img {
-        height: 400px;
+        height: 350px;
         object-fit: cover;
-        border-radius: 8px;
+        border-radius: 12px;
     }
 
     .carousel-control-prev,
     .carousel-control-next {
-        width: 5%;
+        width: 6%;
     }
 
     .carousel-indicators {
-        bottom: -40px;
+        bottom: -35px;
     }
 
         .carousel-indicators button {
-            background-color: #adb5bd;
+            background-color: #cfd8dc;
         }
 
         .carousel-indicators .active {
-            background-color: #007bff;
+            background-color: #1976d2;
         }
 
     .no-images {
         text-align: center;
         padding: 30px;
-        color: #6c757d;
-    }
-
-    /* Botones */
-    .btn-back {
-        border-radius: 30px;
-        padding: 8px 20px;
-        font-weight: 500;
+        color: #90a4ae;
+        font-style: italic;
     }
 </style>
+
 
 @section Scripts {
     <script>

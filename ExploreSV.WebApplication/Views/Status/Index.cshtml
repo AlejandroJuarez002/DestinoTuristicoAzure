@@ -10,7 +10,7 @@
             <i class="fas fa-map-marked-alt"></i> Estados
         </h1>
         <a asp-action="Create" class="btn btn-create">
-            <i class="fas fa-plus-circle"></i> ➕ Nuevo Estado
+            Nuevo Estado
         </a>
     </div>
 
@@ -32,11 +32,8 @@
                                 @Html.DisplayFor(modelItem => item.StatusName)
                             </td>
                             <td style="padding: 10px 20px; text-align: center;">
-                                <a asp-action="Edit" asp-route-id="@item.StatusId" class="btn btn-warning btn-sm">
-                                    ✏ Modificar
-                                </a>
                                 <a asp-action="Delete" asp-route-id="@item.StatusId" class="btn btn-delete">
-                                    <i class="fas fa-trash-alt"></i> Eliminar
+                                    Eliminar
                                 </a>
                             </td>
                         </tr>
@@ -159,4 +156,3 @@
         font-size: 0.9rem;
     }
 </style>
-
