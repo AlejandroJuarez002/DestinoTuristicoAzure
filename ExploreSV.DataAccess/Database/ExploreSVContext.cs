@@ -167,7 +167,6 @@ public partial class ExploreSVContext : DbContext
         modelBuilder.Entity<User>(entity =>
         {
             entity.HasKey(e => e.UserId).HasName("PK__Users__1788CC4C3675977C");
-
             entity.Property(e => e.UserName)
                 .HasMaxLength(50)
                 .IsUnicode(false);
@@ -175,9 +174,10 @@ public partial class ExploreSVContext : DbContext
                 .HasMaxLength(10)
                 .IsUnicode(false);
 
-            entity.HasOne(d => d.Role).WithMany(p => p.Users)
+            entity.HasOne(d => d.Role)
+                .WithMany(p => p.Users)
                 .HasForeignKey(d => d.RoleId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
+                .OnDelete(DeleteBehavior.Restrict)
                 .HasConstraintName("FK__Users__RoleId__398D8EEE");
         });
 

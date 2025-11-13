@@ -66,9 +66,14 @@ namespace ExploreSV.WebApplication.Controllers
             }
         }
 
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int pageNumber = 1, int pageSize = 6)
         {
-            var users = await _mediator.Send(new GetUsersQuery());
+            var query = new GetUsersQuery
+            {
+                PageNumber = pageNumber,
+                PageSize = pageSize
+            };
+            var users = await _mediator.Send(query);
             return View(users);
         }
 
@@ -114,21 +119,21 @@ namespace ExploreSV.WebApplication.Controllers
         //POST: Delete
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id, UserResponse userResponse)
+        public async Task<IActionResult> DeleteConfirmed(int id)
         {
             try
             {
                 var result = await _mediator.Send(new DeleteUserCommand(id));
-                if (result > 0)
-                    return RedirectToAction(nameof(Index));
-                else
+                if (result <= 0)
                     throw new Exception("Sucedio un error al intentar eliminar el Usuario");
+                return RedirectToAction(nameof(Index)); // Redirige al index
+                    
             }
             catch (Exception ex)
             {
                 ModelState.AddModelError("", ex.Message);
                 var user = await _mediator.Send(new GetUserQuery(id)); // Volver a cargar el usuario para la vista
-                return View(user);
+                return View("Delete",user); // Regresa a delete si hay un error
             }
         }
     }

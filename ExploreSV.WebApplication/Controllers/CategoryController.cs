@@ -19,9 +19,14 @@ namespace ExploreSV.WebApplication.Controllers
         {
             _mediator = mediator;
         }
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int pageNumber = 1, int pageSize = 6)
         {
-            var categories = await _mediator.Send(new GetCategoriesQuery());
+            var query = new GetCategoriesQuery
+            {
+                PageNumber = pageNumber,
+                PageSize = pageSize
+            };
+            var categories = await _mediator.Send(query);
             return View(categories);
         }
 

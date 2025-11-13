@@ -20,5 +20,11 @@ namespace ExploreSV.BusinessLogic.UseCases.TouristDestinations.Specifications
 
             Query.Include(td => td.Images);
         }
+
+        public GetTouristDestinationWithCategorySpec(int skip, int take, int TouristDestinationId = 0)
+            : this(TouristDestinationId) // Llama al constructor original
+        {
+            Query.Skip(skip).Take(take);
+        }
     }
 }

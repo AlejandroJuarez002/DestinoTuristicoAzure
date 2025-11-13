@@ -15,7 +15,11 @@ internal sealed class DeleteUserHandler(IEfRepository<User> _repository)
 
         await _repository.DeleteAsync(existingUser, cancellationToken);
 
+        // Verifica que el usuario ya no exista en la base de datos
+        var userStillExists = await _repository.GetByIdAsync(command.UserId, cancellationToken);
+        if (userStillExists != null)
+            throw new Exception("El usuario no se eliminó correctamente de la base de datos.");
+
         return existingUser.UserId;
     }
 }
-

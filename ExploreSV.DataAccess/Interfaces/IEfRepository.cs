@@ -7,5 +7,6 @@ namespace ExploreSV.DataAccess.Interfaces
         Task BeginTransactionAsync();
         Task CommitAsync();
         Task RollbackAsync();
+        Task DeleteAsync(T entity, CancellationToken cancellationToken = default);
     }
 }

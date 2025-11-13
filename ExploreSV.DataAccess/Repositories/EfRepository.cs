@@ -55,5 +55,11 @@ namespace ExploreSV.DataAccess.Repositories
             await _transaction.DisposeAsync();
             _transaction = null;
         }
+
+        public async Task DeleteAsync(T entity, CancellationToken cancellationToken = default)
+        {
+            _context.Set<T>().Remove(entity); // Usa Remove de DbSet<T>
+            await _context.SaveChangesAsync(cancellationToken); // Guarda los cambios
+        }
     }
 }

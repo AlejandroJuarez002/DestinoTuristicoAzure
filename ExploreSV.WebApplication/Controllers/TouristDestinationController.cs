@@ -29,9 +29,14 @@ namespace ExploreSV.WebApplication.Controllers
         }
 
         //GET: TouristDestinationController
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int pageNumber = 1, int pageSize = 6)
         {
-            var touristDestinations = await _mediator.Send(new GetTouristDestinationsQuery());
+            var query = new GetTouristDestinationsQuery
+            {
+                PageNumber = pageNumber,
+                PageSize = pageSize
+            };
+            var touristDestinations = await _mediator.Send(query);
             return View(touristDestinations);
         }
 
@@ -39,9 +44,9 @@ namespace ExploreSV.WebApplication.Controllers
         public async Task<IActionResult> Create()
         {
 
-            var categories = await _mediator.Send(new GetCategoriesQuery());
-            ViewData["CategoryId"] = new SelectList(categories, "CategoryId", "CategoryName");
-
+            var categoriesResult = await _mediator.Send(new GetCategoriesQuery());
+            ViewData["CategoryId"] = new SelectList(categoriesResult.Items, "CategoryId", "CategoryName");
+            
 
             var departments = await _mediator.Send(new GetDepartmentsQuery());
             ViewData["DepartmentId"] = new SelectList(departments, "DepartmentId", "DepartamentName");
@@ -111,10 +116,10 @@ namespace ExploreSV.WebApplication.Controllers
             catch (Exception ex)
             {
                 // Cargar categorías y departamentos nuevamente en caso de error
-                var categories = await _mediator.Send(new GetCategoriesQuery());
+                var categoriesResult = await _mediator.Send(new GetCategoriesQuery());
                 var departments = await _mediator.Send(new GetDepartmentsQuery());
 
-                ViewBag.Categories = new SelectList(categories ?? new List<CategoryResponse>(), "CategoryId", "CategoryName");
+                ViewBag.Categories = new SelectList(categoriesResult.Items ?? new List<CategoryResponse>(), "CategoryId", "CategoryName");
                 ViewBag.Departments = new SelectList(departments ?? new List<DepartmentResponse>(), "DepartmentId", "DepartamentName");
 
                 ModelState.AddModelError("", ex.Message);
@@ -130,8 +135,8 @@ namespace ExploreSV.WebApplication.Controllers
             var statuses = await _mediator.Send(new GetStatusesQuery());
             ViewData["StatusId"] = new SelectList(statuses, "StatusId", "StatusName", touristDestination.StatusId);
 
-            var categories = await _mediator.Send(new GetCategoriesQuery());
-            ViewData["CategoryId"] = new SelectList(categories, "CategoryId", "CategoryName", touristDestination.CategoryId);
+            var categoriesResult = await _mediator.Send(new GetCategoriesQuery());
+            ViewData["CategoryId"] = new SelectList(categoriesResult.Items, "CategoryId", "CategoryName", touristDestination.CategoryId);
 
             var departments = await _mediator.Send(new GetDepartmentsQuery());
             ViewData["DepartmentId"] = new SelectList(departments, "DepartmentId", "DepartamentName", touristDestination.DepartmentId);
@@ -194,8 +199,8 @@ namespace ExploreSV.WebApplication.Controllers
                 var statuses = await _mediator.Send(new GetStatusesQuery()); // tenia punto
                 ViewData["StatusId"] = new SelectList(statuses, "StatusId", "StatusName", updateTouristDestinationRequest.StatusId);
 
-                var categories = await _mediator.Send(new GetCategoriesQuery());
-                ViewData["CategoryId"] = new SelectList(categories, "CategoryId", "CategoryName", updateTouristDestinationRequest.CategoryId);
+                var categoriesResult = await _mediator.Send(new GetCategoriesQuery());
+                ViewData["CategoryId"] = new SelectList(categoriesResult.Items, "CategoryId", "CategoryName", updateTouristDestinationRequest.CategoryId);
 
                 var departments = await _mediator.Send(new GetDepartmentsQuery());
                 ViewData["DepartmentId"] = new SelectList(departments, "DepartamentId", "DepartamentName", updateTouristDestinationRequest.DepartmentId);

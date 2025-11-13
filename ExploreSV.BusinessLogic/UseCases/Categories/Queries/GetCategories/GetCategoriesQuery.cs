@@ -1,12 +1,11 @@
 ﻿using ExploreSV.BusinessLogic.DTOs;
-using ExploreSV.Entities;
+using ExploreSV.BusinessLogic.Utils;
 using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ExploreSV.BusinessLogic.UseCases.Categories.Queries.GetCategories;
 
-public record GetCategoriesQuery() : IRequest<List<CategoryResponse>>;
+public record GetCategoriesQuery() : IRequest<PaginatedList<CategoryResponse>>
+{
+    public int PageNumber { get; init; } = 1;
+    public int PageSize { get; init; } = 6;
+}

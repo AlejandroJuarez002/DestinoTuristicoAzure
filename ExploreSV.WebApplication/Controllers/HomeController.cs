@@ -19,10 +19,18 @@ public class HomeController : Controller
         _mediator = sender;
     }
 
-    public async Task<IActionResult> Index()
+    public async Task<IActionResult> Index(int pageNumber = 1, int pageSize = 6)
     {
-        var touristDestinations = await _mediator.Send(new GetTouristDestinationsQuery());
+        var query = new GetTouristDestinationsQuery
+        {
+            PageNumber = pageNumber,
+            PageSize = pageSize
+        };
+        var touristDestinations = await _mediator.Send(query);
         return View(touristDestinations);
+
+        //var touristDestinations = await _mediator.Send(new GetTouristDestinationsQuery());
+        //return View(touristDestinations);
     }
 
     public IActionResult Privacy()
