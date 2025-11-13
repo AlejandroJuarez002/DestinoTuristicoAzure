@@ -1,9 +1,7 @@
 ﻿@model ExploreSV.BusinessLogic.DTOs.UserResponse
-
 @{
     ViewData["Title"] = "Eliminar Usuario";
 }
-
 <div class="delete-container">
     <div class="delete-header">
         <h1 class="delete-title">
@@ -11,23 +9,20 @@
         </h1>
         <p class="delete-subtitle">¿Está seguro que desea eliminar este usuario?</p>
     </div>
-
     <div class="user-details">
         <h4>Información del Usuario</h4>
         <hr />
-
         <div class="detail-row">
             <div class="detail-label">ID:</div>
             <div class="detail-value">@Html.DisplayFor(model => model.UserId)</div>
         </div>
-
         <div class="detail-row">
             <div class="detail-label">Nombre:</div>
             <div class="detail-value">@Html.DisplayFor(model => model.UserName)</div>
         </div>
     </div>
-
-    <form asp-action="DeleteConfirmed" method="post">
+    <form asp-action="DeleteConfirmed">
+        @Html.AntiForgeryToken()
         <input type="hidden" asp-for="UserId" />
         <div class="delete-actions">
             <button type="submit" class="btn-delete">
