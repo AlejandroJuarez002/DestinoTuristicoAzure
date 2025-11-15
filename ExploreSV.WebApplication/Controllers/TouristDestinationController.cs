@@ -48,8 +48,8 @@ namespace ExploreSV.WebApplication.Controllers
             ViewData["CategoryId"] = new SelectList(categoriesResult.Items, "CategoryId", "CategoryName");
             
 
-            var departments = await _mediator.Send(new GetDepartmentsQuery());
-            ViewData["DepartmentId"] = new SelectList(departments, "DepartmentId", "DepartamentName");
+            var departmentsResult = await _mediator.Send(new GetDepartmentsQuery());
+            ViewData["DepartmentId"] = new SelectList(departmentsResult.Items, "DepartmentId", "DepartamentName");
             return View();
         }
 
@@ -117,10 +117,10 @@ namespace ExploreSV.WebApplication.Controllers
             {
                 // Cargar categorías y departamentos nuevamente en caso de error
                 var categoriesResult = await _mediator.Send(new GetCategoriesQuery());
-                var departments = await _mediator.Send(new GetDepartmentsQuery());
+                var departmentsResult = await _mediator.Send(new GetDepartmentsQuery());
 
                 ViewBag.Categories = new SelectList(categoriesResult.Items ?? new List<CategoryResponse>(), "CategoryId", "CategoryName");
-                ViewBag.Departments = new SelectList(departments ?? new List<DepartmentResponse>(), "DepartmentId", "DepartamentName");
+                ViewBag.Departments = new SelectList(departmentsResult.Items ?? new List<DepartmentResponse>(), "DepartmentId", "DepartamentName");
 
                 ModelState.AddModelError("", ex.Message);
                 return View(createTouristDestinationRequest);
@@ -138,8 +138,8 @@ namespace ExploreSV.WebApplication.Controllers
             var categoriesResult = await _mediator.Send(new GetCategoriesQuery());
             ViewData["CategoryId"] = new SelectList(categoriesResult.Items, "CategoryId", "CategoryName", touristDestination.CategoryId);
 
-            var departments = await _mediator.Send(new GetDepartmentsQuery());
-            ViewData["DepartmentId"] = new SelectList(departments, "DepartmentId", "DepartamentName", touristDestination.DepartmentId);
+            var departmentsResult = await _mediator.Send(new GetDepartmentsQuery());
+            ViewData["DepartmentId"] = new SelectList(departmentsResult.Items, "DepartmentId", "DepartamentName", touristDestination.DepartmentId);
 
             //Mapeo con las imagenes
             var updateRequest = touristDestination.Adapt<UpdateTouristDestinationRequest>();
@@ -202,8 +202,8 @@ namespace ExploreSV.WebApplication.Controllers
                 var categoriesResult = await _mediator.Send(new GetCategoriesQuery());
                 ViewData["CategoryId"] = new SelectList(categoriesResult.Items, "CategoryId", "CategoryName", updateTouristDestinationRequest.CategoryId);
 
-                var departments = await _mediator.Send(new GetDepartmentsQuery());
-                ViewData["DepartmentId"] = new SelectList(departments, "DepartamentId", "DepartamentName", updateTouristDestinationRequest.DepartmentId);
+                var departmentsResult = await _mediator.Send(new GetDepartmentsQuery());
+                ViewData["DepartmentId"] = new SelectList(departmentsResult.Items, "DepartamentId", "DepartamentName", updateTouristDestinationRequest.DepartmentId);
 
                 ModelState.AddModelError("", ex.Message);
                 return View(updateTouristDestinationRequest);
