@@ -29,8 +29,6 @@ public class HomeController : Controller
         var touristDestinations = await _mediator.Send(query);
         return View(touristDestinations);
 
-        //var touristDestinations = await _mediator.Send(new GetTouristDestinationsQuery());
-        //return View(touristDestinations);
     }
 
     public IActionResult Privacy()
