@@ -15,7 +15,6 @@
         <!-- Cuerpo principal -->
         <div class="card-body info-section">
             <div class="row">
-                <!-- Columna de información -->
                 <div class="col-md-12">
                     <div class="mb-4">
                         <h4 class="section-title"><i class="fas fa-info-circle"></i> Descripción</h4>
@@ -44,13 +43,6 @@
                             <p class="detail-value">@Model.CategoryName</p>
                         </div>
                     </div>
-
-                    @* <div class="row mt-3">
-                        <div class="col-md-6 detail-item">
-                            <h5 class="section-title"><i class="fas fa-check-circle"></i> Estado</h5>
-                            <p class="detail-value">@Model.StatusId</p>
-                        </div>
-                    </div> *@
                 </div>
             </div>
 
@@ -62,10 +54,9 @@
                 {
                     <div class="carousel-container">
                         <div id="destinationCarousel" class="carousel slide" data-bs-ride="carousel">
-                            <!-- Indicadores -->
                             <div class="carousel-indicators">
                                 @{
-                                    int counter = 0; // Contador para los indicadores
+                                    int counter = 0;
                                 }
                                 @foreach (var _ in Model.Images)
                                 {
@@ -75,10 +66,9 @@
                                 }
                             </div>
 
-                            <!-- Imágenes -->
                             <div class="carousel-inner">
                                 @{
-                                    bool isFirst = true; // Para marcar el primer item como active
+                                    bool isFirst = true;
                                 }
                                 @foreach (var image in Model.Images)
                                 {
@@ -90,7 +80,6 @@
                                 }
                             </div>
 
-                            <!-- Controles (se mantienen igual) -->
                             <button class="carousel-control-prev" type="button" data-bs-target="#destinationCarousel" data-bs-slide="prev">
                                 <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                                 <span class="visually-hidden">Anterior</span>
@@ -110,12 +99,18 @@
                     </div>
                 }
             </div>
+
+            <!-- 🔹 Botón de regresar dentro de la card -->
+            <div class="text-end mt-4">
+                <button type="button" class="btn btn-outline-secondary" onclick="history.back()">
+                    <i class="fas fa-arrow-left"></i> Regresar
+                </button>
+            </div>
         </div>
     </div>
 </div>
 
 <style>
-    /* Contenedor principal */
     .destination-detail-container {
         max-width: 1000px;
         margin: 40px auto;
@@ -124,7 +119,6 @@
         background-color: #fefefe;
     }
 
-    /* Tarjeta de destino */
     .destination-card {
         background: #fff;
         border-radius: 16px;
@@ -137,12 +131,10 @@
             box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
         }
 
-    /* Encabezado del destino */
     .destination-header {
         background: linear-gradient(135deg, #0d47a1, #1976d2);
         color: white;
         padding: 30px;
-        border-bottom: none;
     }
 
     .destination-title {
@@ -151,7 +143,6 @@
         margin: 0;
     }
 
-    /* Sección de información */
     .info-section {
         padding: 25px 30px;
     }
@@ -173,28 +164,11 @@
             color: #1565c0;
         }
 
-    .detail-item {
-        margin-bottom: 16px;
-    }
-
-    .detail-label {
-        font-weight: 600;
-        color: #37474f;
-        margin-bottom: 4px;
-        display: block;
-    }
-
     .detail-value {
         color: #607d8b;
         line-height: 1.6;
     }
 
-        /* Estilo para descripción multilínea */
-        .detail-value.description {
-            white-space: pre-line;
-        }
-
-    /* Carrusel */
     .images-section {
         margin-top: 30px;
         padding: 20px 30px;
@@ -222,23 +196,6 @@
         border-radius: 12px;
     }
 
-    .carousel-control-prev,
-    .carousel-control-next {
-        width: 6%;
-    }
-
-    .carousel-indicators {
-        bottom: -35px;
-    }
-
-        .carousel-indicators button {
-            background-color: #cfd8dc;
-        }
-
-        .carousel-indicators .active {
-            background-color: #1976d2;
-        }
-
     .no-images {
         text-align: center;
         padding: 30px;
@@ -247,12 +204,10 @@
     }
 </style>
 
-
 @section Scripts {
     <script>
-        // Inicializar el carrusel
         var carousel = new bootstrap.Carousel(document.getElementById('destinationCarousel'), {
-            interval: 5000, // Cambia cada 5 segundos
+            interval: 5000,
             wrap: true
         });
     </script>
