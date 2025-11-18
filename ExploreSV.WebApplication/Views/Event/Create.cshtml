@@ -1,0 +1,42 @@
+﻿@model ExploreSV.BusinessLogic.DTOs.CreateEventRequest
+
+@{
+    ViewData["Title"] = "Crear Evento";
+}
+
+<div class="container mt-4">
+    <div class="card p-4 shadow-sm">
+        <h2 class="mb-3">Crear Evento</h2>
+
+        <form asp-action="Create" method="post">
+            <div class="row">
+
+                <!-- Nombre del Evento -->
+                <div class="col-md-6 mb-3">
+                    <label class="form-label">Nombre del Evento</label>
+                    <input asp-for="EventTitle" class="form-control" />
+                </div>
+
+                <!-- Descripción -->
+                <div class="col-md-12 mb-3">
+                    <label class="form-label">Descripción</label>
+                    <textarea asp-for="EventDescription" class="form-control" rows="3"></textarea>
+                </div>
+
+                <!-- Destino Turístico -->
+                <div class="col-md-12 mb-3">
+                    <label class="form-label">Destino Turístico</label>
+                    <select asp-for="TouristDestinationId" asp-items="ViewBag.TouristDestinations" class="form-control">
+                        <option value="">Seleccione un destino</option>
+                    </select>
+                </div>
+
+                <div class="text-end">
+                    <button type="submit" class="btn btn-primary">Guardar</button>
+                    <a asp-action="Index" class="btn btn-secondary">Cancelar</a>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
